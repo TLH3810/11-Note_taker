@@ -31,11 +31,11 @@ router.post("/notes", (req, res) => {
         .then((note)=>res.json(note))
         .catch((err)=>res.status(500).json(err));
     })
-    noteList.push(newNote)
+/*     noteList.push(newNote)
     fs.writeFile(dbNotes, JSON.stringify(noteList), (err) => {
         if (err) throw err;
         res.json(noteList);
-    });
+    }); */
 //    .delete((req,res) => {
 //console.log("DELETE/notes/:id");
 //console.log(req.body)
