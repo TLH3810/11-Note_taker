@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const dbNotes = require('../db/db');
+const dbNotes = require('../db/db.json');
 //const fs = require('fs');
 //const { uuidv4 } = require('uuid')
 
@@ -16,7 +16,7 @@ router.get('/notes', (req, res) => {
     .catch((err)=>res.status(500).json(err));
 });
 
-router.post("/notes", (req, res) => {
+router.post('/notes', (req, res) => {
     //console.log("POST/notes");
     //console.log(req.body);
    //let noteList = []
@@ -33,17 +33,21 @@ router.post("/notes", (req, res) => {
         .addNote(req.body)
         .then((note)=>res.json(note))
         .catch((err)=>res.status(500).json(err));
-    })
+    });
 /*     noteList.push(newNote)
     fs.writeFile(dbNotes, JSON.stringify(noteList), (err) => {
         if (err) throw err;
         res.json(noteList);
     }); */
-//    .delete((req,res) => {
+router.delete('/notes/:id', (req,res) => {
+dbNotes
+    .deleteNote(req.params.id)
+    .then(()=>res.json({ok:true}))
+    .catch((err)=>res.status(500).json(err));
 //console.log("DELETE/notes/:id");
 //console.log(req.body)
 //  const removeNote = res.body/:id
-//})
+});
 
 
 module.exports = router;
