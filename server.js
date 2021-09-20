@@ -29,18 +29,18 @@ app.get("/assets/css/styles.css", function(req, res) {
 res.sendFile(path.join(__dirname, "./public/assets/css/styles.css"));
 });
 // get, post and delete funciton links
-app.get('/notes', (req, res) => {res.send(json.parse(fs.readFileSync('./db/db.json')))
+app.get('/api/notes', (req, res) => {res.send(json.parse(fs.readFileSync('./db/db.json')))
 });
 
-app.post('/notes', (req, res) => {
+app.post('/api/notes', (req, res) => {
     req.body[id]=uuidv4();
     JSON.parse.push(req.body[id]=uuidv4());
-    let newNote = JSON.stringify(JSON.parse(fs.readFileSync('./db/db.json')));
+    let newNote = JSON.stringify((JSON.parse(fs.readFileSync('./db/db.json'))), null, 2);
     fs.writeFile('./db/db.json', newNote, (err) => err ? console.log(err): console.log('Note Added.'))
     res.send(JSON.parse(fs.readFileSync('./db/db.json')))
     });
 
-app.delete('/notes/:id', (req,res) => {
+app.delete('/api/notes/:id', (req,res) => {
     JSON.parse(fs.readFileSync('./db/db.json')).splice(JSON.parse(fs.readFileSync('./db/db.json')));
     res.send("Delete")
 });
